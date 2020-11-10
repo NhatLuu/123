@@ -1,4 +1,4 @@
-Ghi chú angular
+
  - T?o project
  ng new angular-tour-of-heroes
  
