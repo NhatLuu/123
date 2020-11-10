@@ -1,0 +1,76 @@
+Ghi chú angular
+ - T?o project
+ ng new angular-tour-of-heroes
+ 
+ - M? project
+ cd angular-tour-of-heroes
+ng serve --open
+
+- T?o bi?n co b?n
+	abc = "angular"; tên bi?n = d? li?u
+	ab: Number = 1; tên bi?n: Ki?u d? li?u (= d? li?u);
+	
+- T?o component
+	ng g c heroes
+	 <app-heroes></app-heroes> d? ch?y html heroes trên app.component.html
+	 
+- T?o class
+	export interface Hero {
+    id: number; // Khai báo d? li?u 
+    name: string;
+}
+
+- Khai báo bi?n class
+	import {Hero} from '../hero'; //s? d?ng ? dâu import ? dó (.ts)
+	khai báo class:  hero: Hero ={
+  id: 1, // ph?n t? 1 (cu?i câu ph?y). khai báo {{hero.id}} ? html
+  name: 'Luffy', //khai báo {{hero.name}} ? html
+};
+
+- Khai báo 2 chi?u 
+import { FormsModule } from '@angular/forms'; // <-- NgModel vào module 
+imports: [   //import vào NgModel ? du?i
+  BrowserModule,
+  FormsModule
+];
+
+- T?o M?ng
+	import {Hero} from './hero'; //import d? li?u vào m?ng
+export const HEROES: Hero[] = [ //khai báo tên m?ng: class[] = [ ph?n t? {id: 1, name: 'abc'},]
+    { id: 1, name: 'Dr Nice' },
+    { id: 2, name: 'Narco' },
+    { id: 3, name: 'Bombasto' },
+    { id: 4, name: 'Celeritas' },
+    { id: 5, name: 'Magneta' },
+]
+import {HEROES} from '../mock-heroes'; // khai báo xong ph?i import vào trang ts xu?t d? li?u
+heroes = HEROES; //khai báo tên m?ng = m?ng ; ? exprot d?u ti?n
+
+- S? ki?n click, for, di?u ki?n if
+
+<ul class="heroes">
+    <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)"> //For vòng l?p và Click 
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+
+<div *ngIf="selectedHero"> //If di?u ki?n 
+
+    <h2>{{selectedHero.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{selectedHero.id}}</div>
+    <div>
+        <label>name:
+      <input [(ngModel)]="selectedHero.name" placeholder="name"/>
+    </label>
+    </div>
+
+</div>
+
+- T?o tính nang cho thành ph?n 
+	<app-hero-detail [hero]="selectedHero"></app-hero-detail> // khai báo l?p con vào l?p cha 
+	  @Input() hero: Hero; // khai báo sau input 
+	  
+- Routing
+	import {HeroesComponent} from '../app/heroes/heroes.component' // import d? g?i  trang component ...
+	const routes: Routes = [{path:"luffy", component:HeroesComponent} // khai báo routes : {path: "tên link", component:Tên component}
+];
